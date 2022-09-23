@@ -20,7 +20,12 @@ const postUserSchema = Joi.object({
   image: Joi.string(),
 });
 
+const postCategorySchema = Joi.object({
+  name: Joi.string().required(),
+});
+
 module.exports = {
   loginSchema,
   postUserSchema,
+  postCategorySchema,
 };
