@@ -30,17 +30,32 @@ const create = async (req, res, next) => {
     return next(err);
   }
 
-  res.status(201).json({ token });
+  return res.status(201).json({ token });
 };
 
-const getAll = async (req, res) => {
+const getAll = async (_req, res) => {
   const users = await usersService.getAll();
 
-  res.status(200).json(users);
+  return res.status(200).json(users);
+};
+
+const getById = async (req, res, next) => {
+  const { id } = req.params;
+
+  const { error, user } = await usersService.getById(id);
+
+  if (error && error.type === 'notFound') {
+    const err = new Error(error.message);
+    err.statusCode = 404;
+    return next(err);
+  }
+
+  return res.status(200).json(user);
 };
 
 module.exports = {
   login,
   create,
   getAll,
+  getById,
 };

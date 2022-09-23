@@ -8,6 +8,8 @@ const auth = require('../middlewares/auth');
 const usersController = require('../controllers/users.controller');
 
 router.post('/', userBodyValidation, usersController.create);
+
 router.get('/', auth, usersController.getAll);
+router.get('/:id', auth, usersController.getById);
 
 module.exports = router;
