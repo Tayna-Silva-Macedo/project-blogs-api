@@ -3,8 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 const userBodyValidation = require('../middlewares/userBodyValidation');
+const auth = require('../middlewares/auth');
+
 const usersController = require('../controllers/users.controller');
 
 router.post('/', userBodyValidation, usersController.create);
+router.get('/', auth, usersController.getAll);
 
 module.exports = router;
