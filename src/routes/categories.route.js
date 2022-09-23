@@ -9,4 +9,6 @@ const categoriesController = require('../controllers/categories.controller');
 
 router.post('/', auth, categoryBodyValidation, categoriesController.create);
 
+router.get('/', auth, categoriesController.getAll);
+
 module.exports = router;
