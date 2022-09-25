@@ -12,7 +12,25 @@ const getAll = async () => {
   return categories;
 };
 
+const findAndCountAll = async (categoryIds) => {
+  const { count } = await Category.findAndCountAll({
+    where: { id: categoryIds },
+  });
+
+  if (count !== categoryIds.length) {
+    return {
+      error: {
+        message: '"categoryIds" not found',
+        type: 'notFound',
+      },
+    };
+  }
+
+  return { count };
+};
+
 module.exports = {
   create,
   getAll,
+  findAndCountAll,
 };
