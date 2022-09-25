@@ -1,6 +1,6 @@
 const joiHelper = require('../helpers/joi');
 
-const blogPostBodyValidation = (req, res, next) => {
+const postBlogPostBodyValidation = (req, res, next) => {
   const { title, content, categoryIds } = req.body;
 
   const { error } = joiHelper.postBlogPostsSchema.validate({
@@ -14,4 +14,17 @@ const blogPostBodyValidation = (req, res, next) => {
   return next();
 };
 
-module.exports = blogPostBodyValidation;
+const putBlogPostBodyValidation = (req, res, next) => {
+  const { title, content } = req.body;
+
+  const { error } = joiHelper.putBlogPostsSchema.validate({ title, content });
+
+  if (error) return next(error);
+
+  return next();
+};
+
+module.exports = {
+  postBlogPostBodyValidation,
+  putBlogPostBodyValidation,
+};

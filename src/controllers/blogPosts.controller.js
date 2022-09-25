@@ -42,8 +42,25 @@ const getById = async (req, res, next) => {
   return res.status(200).json(blogPost);
 };
 
+const update = async (req, res, next) => {
+  const { title, content } = req.body;
+  const { id } = req.params;
+  const { id: userId } = req.user;
+
+  const { error, blogPostUpdated } = await blogPostsService.update(title, content, id, userId);
+
+  if (error && error.type === 'unauthorized') {
+    const err = new Error(error.message);
+    err.statusCode = 401;
+    return next(err);
+  }
+
+  return res.status(200).json(blogPostUpdated);
+};
+
 module.exports = {
   create,
   getAll,
   getById,
+  update,
 };

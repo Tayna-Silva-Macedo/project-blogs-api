@@ -7,9 +7,21 @@ const blogPostBodyValidation = require('../middlewares/blogPostBodyValidation');
 
 const blogPostsController = require('../controllers/blogPosts.controller');
 
-router.post('/', auth, blogPostBodyValidation, blogPostsController.create);
+router.post(
+  '/',
+  auth,
+  blogPostBodyValidation.postBlogPostBodyValidation,
+  blogPostsController.create,
+);
 
 router.get('/', auth, blogPostsController.getAll);
 router.get('/:id', auth, blogPostsController.getById);
+
+router.put(
+  '/:id',
+  auth,
+  blogPostBodyValidation.putBlogPostBodyValidation,
+  blogPostsController.update,
+);
 
 module.exports = router;

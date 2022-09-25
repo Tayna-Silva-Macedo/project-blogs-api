@@ -35,7 +35,18 @@ const postBlogPostsSchema = Joi.object({
   }),
   categoryIds: Joi.array().min(1).required().messages({
     'any.required': REQUIRED_FIELD,
-    'array.empty': REQUIRED_FIELD,
+    'array.min': REQUIRED_FIELD,
+  }),
+});
+
+const putBlogPostsSchema = Joi.object({
+  title: Joi.string().required().messages({
+    'any.required': REQUIRED_FIELD,
+    'string.empty': REQUIRED_FIELD,
+  }),
+  content: Joi.string().required().messages({
+    'any.required': REQUIRED_FIELD,
+    'string.empty': REQUIRED_FIELD,
   }),
 });
 
@@ -44,4 +55,5 @@ module.exports = {
   postUserSchema,
   postCategorySchema,
   postBlogPostsSchema,
+  putBlogPostsSchema,
 };
