@@ -2,10 +2,9 @@ const tokenHelper = require('../helpers/token');
 const { User } = require('../models');
 
 const login = async (email, password) => {
-  const [user] = await User.findAll({
+  const user = await User.findOne({
     where: { email, password },
     attributes: { exclude: ['password'] },
-    raw: true,
   });
 
   if (!user) {
@@ -17,7 +16,7 @@ const login = async (email, password) => {
     };
   }
 
-  const payload = user;
+  const payload = user.dataValues;
 
   const token = tokenHelper.create(payload);
 
