@@ -7,7 +7,12 @@ const auth = require('../middlewares/auth');
 
 const categoriesController = require('../controllers/categories.controller');
 
-router.post('/', auth, categoryBodyValidation, categoriesController.create);
+router.post(
+  '/',
+  auth,
+  categoryBodyValidation.postCategoryBodyValidation,
+  categoriesController.create,
+);
 
 router.get('/', auth, categoriesController.getAll);
 

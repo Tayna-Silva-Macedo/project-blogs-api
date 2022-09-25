@@ -1,6 +1,6 @@
 const joiHelper = require('../helpers/joi');
 
-const categoryBodyValidation = (req, res, next) => {
+const postCategoryBodyValidation = (req, res, next) => {
   const { name } = req.body;
 
   const { error } = joiHelper.postCategorySchema.validate({ name });
@@ -10,4 +10,6 @@ const categoryBodyValidation = (req, res, next) => {
   return next();
 };
 
-module.exports = categoryBodyValidation;
+module.exports = {
+  postCategoryBodyValidation,
+};
