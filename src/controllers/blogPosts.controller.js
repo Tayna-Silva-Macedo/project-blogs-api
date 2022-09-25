@@ -18,17 +18,32 @@ const create = async (req, res, next) => {
 
     return res.status(201).json(newPost);
   } catch (e) {
-    next(e);
+    return next(e);
   }
 };
 
 const getAll = async (req, res) => {
   const blogPosts = await blogPostsService.getAll();
 
-  res.status(200).json(blogPosts);
+  return res.status(200).json(blogPosts);
+};
+
+const getById = async (req, res, next) => {
+  const { id } = req.params;
+
+  const { error, blogPost } = await blogPostsService.getById(id);
+
+  if (error) {
+    const err = new Error(error.message);
+    err.statusCode = 404;
+    return next(err);
+  }
+
+  return res.status(200).json(blogPost);
 };
 
 module.exports = {
   create,
   getAll,
+  getById,
 };
