@@ -1,9 +1,11 @@
 const express = require('express');
 
-const loginRoute = require('./routes/login.route');
-const usersRoute = require('./routes/users.route');
-const categoriesRoute = require('./routes/categories.route');
-const blogPostsRoute = require('./routes/blogPosts.route');
+const {
+  loginRoute,
+  usersRoute,
+  categoriesRoute,
+  blogPostsRoute,
+} = require('./routes');
 
 const errorMiddleware = require('./middlewares/error');
 

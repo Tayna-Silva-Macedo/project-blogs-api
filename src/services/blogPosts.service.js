@@ -90,9 +90,31 @@ const update = async (title, content, id, userId) => {
   return { blogPostUpdated: blogPost };
 };
 
+const destroy = async (id, userId) => {
+  const { error } = await getById(id);
+
+  if (error && error.type === 'notFound') {
+    return { error };
+  }
+
+  const deleted = await BlogPost.destroy({ where: { id, userId } });
+
+  if (!deleted) {
+    return {
+      error: {
+        message: 'Unauthorized user',
+        type: 'unauthorized',
+      },
+    };
+  }
+
+  return { error: null };
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  destroy,
 };

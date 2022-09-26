@@ -24,4 +24,6 @@ router.put(
   blogPostsController.update,
 );
 
+router.delete('/:id', auth, blogPostsController.destroy);
+
 module.exports = router;

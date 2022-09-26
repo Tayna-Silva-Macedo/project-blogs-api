@@ -58,9 +58,31 @@ const update = async (req, res, next) => {
   return res.status(200).json(blogPostUpdated);
 };
 
+const destroy = async (req, res, next) => {
+  const { id } = req.params;
+  const { id: userId } = req.user;
+
+  const { error } = await blogPostsService.destroy(id, userId);
+
+  if (error && error.type === 'notFound') {
+    const err = new Error(error.message);
+    err.statusCode = 404;
+    return next(err);
+  }
+
+  if (error && error.type === 'unauthorized') {
+    const err = new Error(error.message);
+    err.statusCode = 401;
+    return next(err);
+  }
+
+  return res.status(204).end();
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  destroy,
 };
