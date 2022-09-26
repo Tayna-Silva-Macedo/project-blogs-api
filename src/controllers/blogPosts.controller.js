@@ -42,6 +42,14 @@ const getById = async (req, res, next) => {
   return res.status(200).json(blogPost);
 };
 
+const getByQuery = async (req, res) => {
+  const { q } = req.query;
+
+  const blogPosts = await blogPostsService.getByQuery(q);
+
+  res.status(200).json(blogPosts);
+};
+
 const update = async (req, res, next) => {
   const { title, content } = req.body;
   const { id } = req.params;
@@ -83,6 +91,7 @@ module.exports = {
   create,
   getAll,
   getById,
+  getByQuery,
   update,
   destroy,
 };

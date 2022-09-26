@@ -15,6 +15,7 @@ router.post(
 );
 
 router.get('/', auth, blogPostsController.getAll);
+router.get('/search', auth, blogPostsController.getByQuery);
 router.get('/:id', auth, blogPostsController.getById);
 
 router.put(
