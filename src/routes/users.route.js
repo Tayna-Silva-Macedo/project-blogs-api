@@ -16,4 +16,6 @@ router.post(
 router.get('/', auth, usersController.getAll);
 router.get('/:id', auth, usersController.getById);
 
+router.delete('/me', auth, usersController.destroy);
+
 module.exports = router;
