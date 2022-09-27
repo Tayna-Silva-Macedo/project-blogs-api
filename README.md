@@ -30,13 +30,13 @@ Para a geração e verificação de tokens foi utilizado o ***JWT*** (JSON Web T
   docker-compose up -d --build
 ```
 
-3. Acesse o terminal interativo do container criado e instale as dependências:
+3. Acesse o terminal interativo do container criado:
 ```
   docker exec -it blogs_api bash
-  npm install
 ```
 
-4. Por fim, ainda dentro do container, rode a aplicação utilizando o comando:
+4. Por fim, dentro do container, instale as dependências e rode a aplicação utilizando o comando:
 ```
+  npm install
   npm run debug
 ```
