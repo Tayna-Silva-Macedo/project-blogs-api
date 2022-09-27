@@ -21,22 +21,22 @@ Para a geração e verificação de tokens foi utilizado o ***JWT*** (JSON Web T
 
 1. Navegue até o local onde deseja clonar o repositório e utilize o **git clone**:
 ```
-  git clone git@github.com:Tayna-Silva-Macedo/project-blogs-api.git
+git clone git@github.com:Tayna-Silva-Macedo/project-blogs-api.git
 ```
 
 2. Acesse o diretório do projeto **project-blogs-api** e rode os serviços **node** e **db** com os seguintes comandos:
 ```
-  cd project-blogs-api
-  docker-compose up -d --build
+cd project-blogs-api
+docker-compose up -d --build
 ```
 
 3. Acesse o terminal interativo do container criado:
 ```
-  docker exec -it blogs_api bash
+docker exec -it blogs_api bash
 ```
 
 4. Por fim, dentro do container, instale as dependências e rode a aplicação utilizando os comandos:
 ```
-  npm install
-  npm run debug
+npm install
+npm run debug
 ```
