@@ -35,7 +35,7 @@ Para a geração e verificação de tokens foi utilizado o ***JWT*** (JSON Web T
   docker exec -it blogs_api bash
 ```
 
-4. Por fim, dentro do container, instale as dependências e rode a aplicação utilizando o comando:
+4. Por fim, dentro do container, instale as dependências e rode a aplicação utilizando os comandos:
 ```
   npm install
   npm run debug
