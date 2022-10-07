@@ -1,5 +1,6 @@
 const tokenHelper = require('../helpers/token');
 const { User } = require('../models');
+const generateError = require('../utils/genericError');
 
 const login = async (email, password) => {
   const user = await User.findOne({
@@ -8,19 +9,14 @@ const login = async (email, password) => {
   });
 
   if (!user) {
-    return {
-      error: {
-        message: 'Invalid fields',
-        type: 'invalidCredentials',
-      },
-    };
+    throw generateError('Invalid fields', 401);
   }
 
   const payload = user.dataValues;
 
   const token = tokenHelper.create(payload);
 
-  return { token };
+  return token;
 };
 
 const getByEmail = async (email) => {
@@ -31,16 +27,14 @@ const getByEmail = async (email) => {
   return user;
 };
 
-const create = async ({ displayName, email, password, image }) => {
+const userExists = async (email) => {
   const [user] = await getByEmail(email);
+  return user;
+};
 
-  if (user) {
-    return {
-      error: {
-        message: 'User already registered',
-        type: 'alreadyExists',
-      },
-    };
+const create = async ({ displayName, email, password, image }) => {
+  if (await userExists(email)) {
+    throw generateError('User already registered', 409);
   }
 
   await User.create({ displayName, email, password, image });
@@ -74,12 +68,7 @@ const getById = async (id) => {
   });
 
   if (!user) {
-    return {
-      error: {
-        message: 'User does not exist',
-        type: 'notFound',
-      },
-    };
+    throw generateError('User does not exist', 404);
   }
 
   return { user };
